@@ -350,6 +350,7 @@ func (p *Proxy) StatusTest(ctx context.Context, rawURL string) (status uint16, o
 		return 1, false, fmt.Errorf("failed to get TLS fingerprint: %s", preset.FingerprintName)
 	}
 
+	// force ForceAttemptHTTP2 to false and use BuildWebsocketHandshakeState to custom http1.1 type for clear status code detection
 	transport := &http.Transport{
 		MaxIdleConns:          100,
 		IdleConnTimeout:       90 * time.Second,
